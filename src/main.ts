@@ -8,7 +8,6 @@ const startUrls = [
 ];
 
 const crawler = new PuppeteerCrawler({
-    // proxyConfiguration: new ProxyConfiguration({ proxyUrls: ['...'] }),
     requestHandler: router,
     headless: false,
 });

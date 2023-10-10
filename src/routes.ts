@@ -9,11 +9,11 @@ router.addDefaultHandler(async ({ page, enqueueLinks, }) => {
 
     await enqueueLinks({
         globs: [href],
-        label: 'scrapInfo',
+        label: 'scrapAboutUs',
     });
 });
 
-router.addHandler('scrapInfo', async ({ request, page, pushData, }) => {
+router.addHandler('scrapAboutUs', async ({ request, page, pushData, }) => {
     const aboutUsParagraphs = await scrapAboutUs(page);
 
     await pushData({
