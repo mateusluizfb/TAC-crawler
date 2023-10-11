@@ -1,6 +1,7 @@
 import { createPuppeteerRouter } from 'crawlee';
-import findAboutUsLink from './services/findAboutUsLink.js';
-import scrapAboutUs from './services/scrapAboutUs.js';
+
+import findAboutUsLink from './services/scrapper/findAboutUsLink.js';
+import scrapParagraphs from './services/scrapper/scrapParagraphs.js';
 
 export const router = createPuppeteerRouter();
 
@@ -9,15 +10,15 @@ router.addDefaultHandler(async ({ page, enqueueLinks, }) => {
 
     await enqueueLinks({
         globs: [href],
-        label: 'scrapAboutUs',
+        label: 'scrapParagraphs',
     });
 });
 
-router.addHandler('scrapAboutUs', async ({ request, page, pushData, }) => {
-    const aboutUsParagraphs = await scrapAboutUs(page);
+router.addHandler('scrapParagraphs', async ({ request, page, pushData, }) => {
+    const paragraphs = await scrapParagraphs(page);
 
     await pushData({
         url: request.url,
-        text: aboutUsParagraphs,
+        text: paragraphs,
     });
 });
