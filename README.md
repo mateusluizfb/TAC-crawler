@@ -1,8 +1,14 @@
-# Crawlee + PuppeteerCrawler + TypeScript project
+# TAC Crawler
 
-This template is a production ready boilerplate for developing with `PuppeteerCrawler`. Use this to bootstrap your projects using the most up-to-date code.
+## Description
 
-If you're looking for examples or want to learn more visit:
+Make sure you have the latest version of Node.js installed.
 
-- [Documentation](https://crawlee.dev/api/puppeteer-crawler/class/PuppeteerCrawler)
-- [Examples](https://crawlee.dev/docs/examples/puppeteer-crawler)
+1. Install dependencies - `yarn install`
+2. Run - `yarn start`
+
+This project uses:
+
+- As our crawler/scrapping framework: (Crawlee)[https://github.com/apify/crawlee]
+- And for backing the scrapping: (Puppeteer)[https://pptr.dev/]
+

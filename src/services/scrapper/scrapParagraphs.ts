@@ -1,8 +1,3 @@
-const PATTERNS = [
-    'Quem somos',
-    'Quem Somos',
-]
-
 /*
 
 It returns all the paragraphs in the page.
