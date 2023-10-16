@@ -1,13 +1,17 @@
-import getStorageResults from './getStorageResults';
-import cleanStorageResults from './cleanStorageResults';
-import exportStorageResults from './exportStorageResults';
+import getStorageResults from './getStorageResults.ts';
+import cleanStorageResults from './cleanStorageResults.ts';
+// import exportStorageResults from './exportStorageResults';
+
+// const JSON_FILES_PATH = '../../../storage/datasets/default'
 
 function storageParser() {
     const storageResults = getStorageResults();
     const cleanedStorage = cleanStorageResults(storageResults);
-    const exportedStorage = exportStorageResults(cleanedStorage);
+    console.log(cleanedStorage)
 
-    return exportedStorage;
+    // TODO:
+    // const exportedStorage = exportStorageResults(cleanedStorage);
+    // return exportedStorage;
 }
 
-export default storageParser;
+storageParser();

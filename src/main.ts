@@ -12,7 +12,7 @@ const startUrls = newsSites
 
 const crawler = new PuppeteerCrawler({
     requestHandler: router,
-    headless: false,
+    headless: true,
 });
 
 await crawler.run(startUrls);
