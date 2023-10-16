@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 /*
     Given an array of objects with the following structure:
     {
@@ -11,7 +13,13 @@
     This function exports the data to a CSV file.
 */
 function exportStorageResults(storageResults) {
-    // TODO
+    const formattedData = storageResults.map(result => {
+        const { url, text } = result;
+        const textString = text.join(' ');
+        return `"${url}","${textString}"`;
+    }).join('\n');
+
+    fs.writeFileSync('storage/results.csv', formattedData);
 }
 
 export default exportStorageResults;
