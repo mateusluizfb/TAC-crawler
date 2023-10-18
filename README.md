@@ -13,3 +13,14 @@ This project uses:
 - As our crawler/scrapping framework: (Crawlee)[https://github.com/apify/crawlee]
 - And for backing the scrapping: (Puppeteer)[https://pptr.dev/]
 
+
+## Next steps:
+
+- Main.ts
+    = Extract the code that returns the correct sites to be scrapped to a separate file, so that it can be easily changed.
+
+- Scrapper
+    = Improve the data scrapping. Currently we extract all the texts from the HTML pages, but how do we identify only texts that are relevant to be scrapped?
+
+- Parser
+    = Improve data cleaning, given the data extracted from the HTML pages. How do we know which data is relevant to be kept?
