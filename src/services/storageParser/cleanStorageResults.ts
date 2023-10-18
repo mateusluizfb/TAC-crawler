@@ -25,6 +25,12 @@ const INVALID_TEXT_REGEX_PATTENRS = [
     /{[^}]*}/g,
 ]
 
+// Sometimes the data scrapped has multiple copies, we only want to keep one
+function removeDuplicates(texts) {
+    return texts.filter((text, index) => texts.indexOf(text) === index)
+}
+
+
 function cleanStorageResults(storageResults) {
     return storageResults.map(({ url, text: texts }) => {
 
@@ -34,9 +40,11 @@ function cleanStorageResults(storageResults) {
             .map(text => text?.replace(/\n/g, '')) // Replace breakline
             .map(text => text?.replace(/\t/g, '')) // Replace breakline
         
+        const uniqueTexts = removeDuplicates(filteredTexts)
+
         return {
             url,
-            text: filteredTexts
+            text: uniqueTexts
         }
     })
 
