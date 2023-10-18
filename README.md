@@ -4,9 +4,9 @@
 
 Make sure you have the latest version of Node.js installed.
 
-1. Install dependencies - `yarn install`
-2. Run the scrapper - `yarn start`
-3. Run the parser - `yarn parse`
+1. Install dependencies - `npm install`
+2. Run the scrapper - `npm run start`
+3. Run the parser - `npm run parse`
 
 This project uses:
 
