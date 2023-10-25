@@ -13,7 +13,7 @@
 */
 
 const VALID_TEXT_REGEX_PATTERNS = [
-    // Regex to match only text
+    // Regex to match only text that starts with a capital letter and ends with a dot.
     /[A-Z][^.]*\./g,
 ]
 
@@ -37,8 +37,6 @@ function cleanStorageResults(storageResults) {
         const filteredTexts = texts
             .filter(text => VALID_TEXT_REGEX_PATTERNS.some(pattern => pattern.test(text)))
             .filter(text => !INVALID_TEXT_REGEX_PATTENRS.some(pattern => pattern.test(text)))
-            .map(text => text?.replace(/\n/g, '')) // Replace breakline
-            .map(text => text?.replace(/\t/g, '')) // Replace breakline
         
         const uniqueTexts = removeDuplicates(filteredTexts)
 

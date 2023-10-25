@@ -7,6 +7,7 @@ Make sure you have the latest version of Node.js installed.
 1. Install dependencies - `npm install`
 2. Run the scrapper - `npm run start`
 3. Run the parser - `npm run parse`
+4. Run a separate file - `npm run only-script src/lib/openai.ts`
 
 This project uses:
 
@@ -24,3 +25,8 @@ This project uses:
 
 - Parser
     = Improve data cleaning, given the data extracted from the HTML pages. How do we know which data is relevant to be kept?
+
+- Support OpenAI
+    = Implement the `src/lib/openai.ts` to return a answer for a question
+    = Use this `src/lib/openai.ts` in the cleanStorageResults 
+        = Build the prompt that contains the page raw text and asks openai to answer extract the "About us" section

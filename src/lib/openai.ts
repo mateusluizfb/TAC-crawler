@@ -1,3 +1,4 @@
+// https://platform.openai.com/docs/libraries/node-js-library
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
@@ -18,4 +19,4 @@ export const createCompletion = async (prompt) => {
     return chatCompletion.choices[0];
 }
 
-export default openai;
+export default createCompletion;
