@@ -37,7 +37,8 @@ function cleanStorageResults(storageResults) {
         const filteredTexts = texts
             .filter(text => VALID_TEXT_REGEX_PATTERNS.some(pattern => pattern.test(text)))
             .filter(text => !INVALID_TEXT_REGEX_PATTENRS.some(pattern => pattern.test(text)))
-        
+            .map(text => text.replace(/(\r\n|\n|\r)/gm, " "))
+            
         const uniqueTexts = removeDuplicates(filteredTexts)
 
         return {
@@ -45,7 +46,6 @@ function cleanStorageResults(storageResults) {
             text: uniqueTexts
         }
     })
-
 }
 
 export default cleanStorageResults;

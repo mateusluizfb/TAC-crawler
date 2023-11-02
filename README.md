@@ -14,7 +14,6 @@ This project uses:
 - As our crawler/scrapping framework: (Crawlee)[https://github.com/apify/crawlee]
 - And for backing the scrapping: (Puppeteer)[https://pptr.dev/]
 
-
 ## Next steps:
 
 - Main.ts

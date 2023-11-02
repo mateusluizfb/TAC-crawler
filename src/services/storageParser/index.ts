@@ -1,13 +1,15 @@
-require('dotenv').config()
+import 'dotenv/config'
 
 import getStorageResults from './getStorageResults.ts';
 import cleanStorageResults from './cleanStorageResults.ts';
+import extractAboutUsText from './extractAboutUsText.ts';
 import exportStorageResults from './exportStorageResults.ts';
 
-function storageParser() {
+async function storageParser() {
     const storageResults = getStorageResults();
     const cleanedStorage = cleanStorageResults(storageResults);
-    return exportStorageResults(cleanedStorage)
+    const extractedAboutUsText = extractAboutUsText(cleanedStorage);
+    // return exportStorageResults(cleanedStorage)
 }
 
 storageParser();

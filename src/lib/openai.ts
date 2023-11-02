@@ -14,7 +14,9 @@ export const createCompletion = async (prompt) => {
         model: 'gpt-3.5-turbo',
     });
 
-    return chatCompletion.choices[0];
+    return chatCompletion.choices[0].message.content;
 }
 
-export default createCompletion;
+export default {
+    createCompletion,
+};
