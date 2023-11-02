@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 import getStorageResults from './getStorageResults.ts';
 import cleanStorageResults from './cleanStorageResults.ts';
 import exportStorageResults from './exportStorageResults.ts';

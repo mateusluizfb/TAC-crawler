@@ -1,9 +1,7 @@
 // https://platform.openai.com/docs/libraries/node-js-library
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: 'my api key', // defaults to process.env["OPENAI_API_KEY"]
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const createCompletion = async (prompt) => {
     const chatCompletion = await openai.chat.completions.create({
