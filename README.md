@@ -28,5 +28,6 @@ This project uses:
 
 - Support OpenAI
     = Implement the `src/lib/openai.ts` to return a answer for a question
-    = Use this `src/lib/openai.ts` in the cleanStorageResults 
+    = Use this `src/lib/openai.ts` in the cleanStorageResults
+        = Build the prompt that asks if the page raw text has the "About us" section
         = Build the prompt that contains the page raw text and asks openai to answer extract the "About us" section
