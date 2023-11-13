@@ -15,8 +15,8 @@ import fs from 'fs';
 function exportStorageResults(storageResults) {
     const formattedData = storageResults.map(result => {
         const { url, text } = result;
-        const textString = text.join(' ');
-        return `"${url}","${textString}"`;
+        console.log(result)
+        return `"${url}","${text}"`;
     }).join('\n');
 
     fs.writeFileSync('storage/results.csv', formattedData);

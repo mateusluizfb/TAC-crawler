@@ -8,8 +8,8 @@ import exportStorageResults from './exportStorageResults.ts';
 async function storageParser() {
     const storageResults = getStorageResults();
     const cleanedStorage = cleanStorageResults(storageResults);
-    const extractedAboutUsText = extractAboutUsText(cleanedStorage);
-    // return exportStorageResults(cleanedStorage)
+    const extractedAboutUsText = await extractAboutUsText(cleanedStorage);
+    return exportStorageResults(extractedAboutUsText)
 }
 
 storageParser();
