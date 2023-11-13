@@ -2,6 +2,18 @@
 import { url } from 'inspector';
 import openAi from '../../lib/openai.ts';
 
+function isYesAnswer(text) {
+    const YES_ALTERNATIVES = [
+        'SIM',
+        'SIM.',
+        'SIM!',
+        'Sim',
+        'Sim.',
+    ]
+
+    return YES_ALTERNATIVES.some(alternative => text.includes(alternative))
+}
+
 async function validate(textString, url) {
     const reduceTextString = textString.slice(0, 3000)
     const askAboutUsInfoPrompt = `` +
@@ -35,15 +47,15 @@ async function extractAboutUsText(cleanedStorage) {
         console.log('Verificando a url: ', url)
     
         const hasAboutUsInfo = await validate(text, url)
-        if (hasAboutUsInfo === 'SIM') {
+
+        if (isYesAnswer(hasAboutUsInfo)) {
             const aboutUsInfo = await extract(text, url)
         
             extractedAboutUsText.push({
                 url,
                 text: aboutUsInfo,
             })
-        }
-        else {
+        } else {
             extractedAboutUsText.push({
                 url,
                 text: ''})
