@@ -17,33 +17,45 @@ const VALID_TEXT_REGEX_PATTERNS = [
     /[A-Z][^.]*\./g,
 ]
 
-const INVALID_TEXT_REGEX_PATTENRS = [
-    // Regex to match code like text
+const FILTER_TEXT_REGEX_PATTENRS = [
+    // Various regex patterns matching code-like text
+    /(\r\n|\n|\r)/gm,
+    /<iframe[^>]*>(.*?)<\/iframe>/g,
+    /\.(\w+)(\s*\.\1:(hover|visited|active|focus))+/g,
     /\/\*[^]*?\*\/|\/\/[^\r\n]*|function\s+\w*\s*\(.*\)|\b\w+\s*\(.*\)\s*{[\s\S]*}/g,
     /{[^}]*}|(var\s+\w+\s*=|const\s+\w+\s*=|let\s+\w+\s*=)[^;]*;/g,
     /{[^}]*}|(var|const|let)\s+\w+\s*=[^;]+;/g,
     /{[^}]*}/g,
+    /\b\w+(\.\w+)*\s*\([^)]*\)/g,
+    /\b\w+\s*\([^)]*\)/g,
+    /\[\s*(\d+\s*,\s*)*\d+\s*\]/g,
 ]
 
 // Sometimes the data scrapped has multiple copies, we only want to keep one
-function removeDuplicates(texts) {
+function removeDuplicatedItems(texts) {
     return texts.filter((text, index) => texts.indexOf(text) === index)
 }
 
+function removeInvalidTexts(text) {
+    let cleanedText = text
 
-function cleanStorageResults(storageResults) {
+    for (const pattern of FILTER_TEXT_REGEX_PATTENRS) {
+        cleanedText = cleanedText.replace(pattern, '')
+    }
+
+    return cleanedText
+}
+
+function cleanStorageResults(storageResults) {    
     return storageResults.map(({ url, text: texts }) => {
 
-        const filteredTexts = texts
-            .filter(text => VALID_TEXT_REGEX_PATTERNS.some(pattern => pattern.test(text)))
-            .filter(text => !INVALID_TEXT_REGEX_PATTENRS.some(pattern => pattern.test(text)))
-            .map(text => text.replace(/(\r\n|\n|\r)/gm, " "))
-            
-        const uniqueTexts = removeDuplicates(filteredTexts)
+        const uniqueTexts = removeDuplicatedItems(texts)
+        const normalizedText = uniqueTexts.join(' ')
+        const cleanedText = removeInvalidTexts(normalizedText)
 
         return {
             url,
-            text: uniqueTexts
+            text: cleanedText
         }
     })
 }
