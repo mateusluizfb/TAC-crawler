@@ -24,3 +24,6 @@ This project uses:
 
 - Parser
     = Improve data cleaning, given the data extracted from the HTML pages. How do we know which data is relevant to be kept?
+
+- Support OpenAI
+    = Test different prompts that extracts the site info.
