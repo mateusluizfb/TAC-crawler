@@ -1,5 +1,4 @@
 
-import { url } from 'inspector';
 import openAi from '../../lib/openai.ts';
 
 function isYesAnswer(text) {
@@ -14,8 +13,32 @@ function isYesAnswer(text) {
     return YES_ALTERNATIVES.some(alternative => text.includes(alternative))
 }
 
+/* 
+    This function uses the OpenAI API to summarize a text. It takes the input,
+    splits it in smaller chunks, and iteratively summarizes each chunk. At the end,
+    combines it all in a single summarized text.
+*/
+async function summarize(text){
+    const chunkSize = 2000;
+    const chunks = [];
+    for (let i = 0; i < text.length; i += chunkSize) {
+        chunks.push(text.slice(i, i + chunkSize));
+    }
+
+    const summaries = [];
+    let previousSummary = '';
+    for (const chunk of chunks) {
+        const prompt = `${previousSummary}\n\nResuma o texto seguinte:\n\n${chunk}`;
+        previousSummary = await openAi.createCompletion(prompt);
+        summaries.push(previousSummary);
+    }
+
+    return summaries.join(' ');
+}
+
 async function validate(textString, url) {
     const reduceTextString = textString.slice(0, 3000)
+
     const askAboutUsInfoPrompt = `` +
     `${reduceTextString}` +
     `\n\n` +
@@ -25,42 +48,26 @@ async function validate(textString, url) {
     return result
 }
 
-async function extract (textString, url) {
-    const reduceTextString = textString.slice(0, 3000)
-    const extractAboutUsInfoPrompt = `` +
-    `${reduceTextString}` +
-    `\n\n` +
-    `Apenas usando o texto acima, extraia a informação sobre o site ${url}.`
-
-    const result = await openAi.createCompletion(extractAboutUsInfoPrompt);
-    return result
-}
-
-
 async function extractAboutUsText(cleanedStorage) {
-    console.log('rodando extractAboutUsText')
-
     const extractedAboutUsText = []
     for (const siteText of cleanedStorage) {
         const url = siteText.url
         const text = siteText.text
-        console.log('Verificando a url: ', url)
+        
+        console.log(`Verificando a url: ${url}`)
     
         const hasAboutUsInfo = await validate(text, url)
 
         if (isYesAnswer(hasAboutUsInfo)) {
-            const aboutUsInfo = await extract(text, url)
-        
-            extractedAboutUsText.push({
-                url,
-                text: aboutUsInfo,
-            })
+            console.log(`A url ${url} possui informação sobre o site.`)
+            const summarizedInfo = await summarize(text)
+            extractedAboutUsText.push({ url, text: summarizedInfo })
         } else {
-            extractedAboutUsText.push({
-                url,
-                text: ''})
+            console.log(`A url ${url} não possui informação sobre o site.`)
+            extractedAboutUsText.push({ url, text: '' })
         }
     }
+
     return extractedAboutUsText
 }
 
