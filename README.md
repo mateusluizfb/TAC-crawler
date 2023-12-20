@@ -7,7 +7,7 @@ Make sure you have the latest version of Node.js installed.
 1. Install dependencies - `npm install`
 2. Run the scrapper - `npm run start`
 3. Run the parser - `npm run parse`
-4. Run a separate file - `npm run only-script src/lib/openai.ts`
+4. Run a separate file - Example: `npm run only-script src/lib/openai.ts`
 
 This project uses:
 
@@ -26,5 +26,4 @@ This project uses:
     = Improve data cleaning, given the data extracted from the HTML pages. How do we know which data is relevant to be kept?
 
 - Support OpenAI
-    = Find a way to reduce the cleaned text so it can fit the prompt without exceeding the 4096 characters limit.
     = Test different prompts that extracts the site info.

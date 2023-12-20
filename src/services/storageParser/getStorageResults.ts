@@ -3,8 +3,9 @@ import fs from 'fs';
 const STORAGE_PATH = 'storage/datasets/default';
 
 /*
-    It opens the storage folder and reads all the files in it.
-    Returns an array of objects, each object representing a file in the storage folder.
+    Abrimos a pasta de storage e lemos todos os arquivos dentro dela.
+
+    Retorna um array de objetos, cada objeto representa um arquivo na pasta de storage.
 */
 function getStorageResults() {
     const files = fs.readdirSync(STORAGE_PATH);

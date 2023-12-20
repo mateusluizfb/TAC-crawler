@@ -3,6 +3,9 @@ import OpenAI from 'openai';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+/*
+    Função responsável por chamar a API do OpenAI e retornar o texto resumido.
+*/
 export const createCompletion = async (prompt) => {
     const chatCompletion = await openai.chat.completions.create({
         messages: [
