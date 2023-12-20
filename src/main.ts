@@ -18,7 +18,7 @@ const startUrls = newsSites
 
 const crawler = new PuppeteerCrawler({
     requestHandler: router,
-    headless: true,
+    headless: false, // Para ver o que está acontecendo no browser, deixe como false, caso contrário, deixe como true
 });
 
 // Inicia o crawler nas urls limpas e transformadas
