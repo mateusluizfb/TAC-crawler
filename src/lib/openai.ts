@@ -7,6 +7,10 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     Função responsável por chamar a API do OpenAI e retornar o texto resumido.
 */
 export const createCompletion = async (prompt) => {
+    if (!process.env.OPENAI_API_KEY) {
+        throw new Error('OPENAI_API_KEY not found');
+    }
+
     const chatCompletion = await openai.chat.completions.create({
         messages: [
             {

@@ -7,6 +7,8 @@ Make sure you have the latest version of Node.js installed.
 1. Install dependencies - `npm install`
 2. Run the scrapper - `npm run start`
 3. Run the parser - `npm run parse`
+    - To use the parser, the program will query OpenAI's API. You need to have an account and an API key. You need to create an account at OpenAI and get a free API key.
+    - Once this is done, create a .env file with your API key. Example: `OPENAI_API_KEY=sk-1234567890`
 4. Run a separate file - Example: `npm run only-script src/lib/openai.ts`
 
 This project uses:
@@ -27,3 +29,6 @@ This project uses:
 
 - Support OpenAI
     = Test different prompts that extracts the site info.
+
+- Support other types of text summarization
+    = Test different text summarization algorithms. Currently we are using the OpenAI API, but we could use other models, APIs or algorithms.
