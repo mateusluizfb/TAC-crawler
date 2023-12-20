@@ -1,24 +1,21 @@
 /*
-    Given an array of objects with the following structure:
-    {
-        "url": "1",
-        "text": [
-            "Jornalismo independente, democrático e para todos",
-            "Eric Nepomuceno é jornalista e escritor",
-        ]
-    }
+Dado um array de objetos com a seguinte estrutura:
+{
+    "url": "1",
+    "text": [
+        "Jornalismo independente, democrático e para todos",
+        "Eric Nepomuceno é jornalista e escritor",
+    ]
+}
 
-    This function removes the unrelevant data from each object, keeping only the ones relevant for
-    the analysis, in this case, the "About Us" text.
+Esta função remove os dados irrelevantes de cada objeto, mantendo apenas aqueles relevantes para
+a análise, neste caso, o texto "Sobre Nós".
 */
 
-const VALID_TEXT_REGEX_PATTERNS = [
-    // Regex to match only text that starts with a capital letter and ends with a dot.
-    /[A-Z][^.]*\./g,
-]
-
+// A lista de Regex abaixo é responsável por fazer o matching de padrões que não são relevantes
+// Como padrões de código, comentários, etc. Eles geralmente vem presentes no dado mais cru
+// extraído pelo crawler. Vários desses padrões foram gerados usando o ChatGPT.
 const FILTER_TEXT_REGEX_PATTENRS = [
-    // Various regex patterns matching code-like text
     /(\r\n|\n|\r)/gm,
     /<iframe[^>]*>(.*?)<\/iframe>/g,
     /\.(\w+)(\s*\.\1:(hover|visited|active|focus))+/g,
@@ -31,11 +28,12 @@ const FILTER_TEXT_REGEX_PATTENRS = [
     /\[\s*(\d+\s*,\s*)*\d+\s*\]/g,
 ]
 
-// Sometimes the data scrapped has multiple copies, we only want to keep one
+// As vezes o dado extraído tem cópias, queremos manter apenas uma
 function removeDuplicatedItems(texts) {
     return texts.filter((text, index) => texts.indexOf(text) === index)
 }
 
+// Remove os padrões de texto que não são relevantes
 function removeInvalidTexts(text) {
     let cleanedText = text
 
@@ -46,6 +44,7 @@ function removeInvalidTexts(text) {
     return cleanedText
 }
 
+// Essa função faz uma primeira limpeza nos dados extraídos pelo crawler
 function cleanStorageResults(storageResults) {    
     return storageResults.map(({ url, text: texts }) => {
 

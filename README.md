@@ -7,7 +7,7 @@ Make sure you have the latest version of Node.js installed.
 1. Install dependencies - `npm install`
 2. Run the scrapper - `npm run start`
 3. Run the parser - `npm run parse`
-4. Run a separate file - `npm run only-script src/lib/openai.ts`
+4. Run a separate file - Example: `npm run only-script src/lib/openai.ts`
 
 This project uses:
 
