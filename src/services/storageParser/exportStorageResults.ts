@@ -19,7 +19,9 @@ function exportStorageResults(storageResults) {
         return `"${url}","${text}"`;
     }).join('\n');
 
-    fs.writeFileSync('storage/results.csv', formattedData);
+
+    const nowDate = new Date();
+    fs.writeFileSync(`storage/results-${nowDate.getFullYear()}-${nowDate.getMonth()}-${nowDate.getDate()}.csv`, formattedData);
 }
 
 export default exportStorageResults;
