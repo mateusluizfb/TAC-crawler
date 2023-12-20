@@ -19,7 +19,7 @@ function isYesAnswer(text) {
     combines it all in a single summarized text.
 */
 async function summarize(text){
-    const chunkSize = 2000;
+    const chunkSize = 2500;
     const chunks = [];
     for (let i = 0; i < text.length; i += chunkSize) {
         chunks.push(text.slice(i, i + chunkSize));
@@ -29,6 +29,8 @@ async function summarize(text){
     let previousSummary = '';
     for (const chunk of chunks) {
         const prompt = `${previousSummary}\n\nResuma o texto seguinte:\n\n${chunk}`;
+        // wait 22s to avoid OpenAI API rate limit
+        await new Promise(resolve => setTimeout(resolve, 22000));
         previousSummary = await openAi.createCompletion(prompt);
         summaries.push(previousSummary);
     }
@@ -43,6 +45,9 @@ async function validate(textString, url) {
     `${reduceTextString}` +
     `\n\n` +
     `O texto acima possui informação sobre o site ${url}? Utilize apenas o texto acima como informação. Responda "SIM" ou "NAO".`
+
+    // wait 22s to avoid OpenAI API rate limit
+    await new Promise(resolve => setTimeout(resolve, 22000));
 
     const result = await openAi.createCompletion(askAboutUsInfoPrompt);
     return result
